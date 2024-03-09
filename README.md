@@ -38,7 +38,7 @@ Newlines and spaces are considered white space and are used to separate tokens.
           | <func_call>
           | <assign>
           | "GOTO" <identifier>
-<func_call> ::= "CALL" <func_name> "()" ("WITH" <inner_code>* "END")?
+<func_call> ::= "CALL" <func_name> ("WITH" <inner_code>* "END")?
 <expr> ::= <unary> <op> <unary>
 <unary> ::= <identifier>
       | <number>
