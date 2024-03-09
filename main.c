@@ -340,6 +340,9 @@ int interpreter(const struct tokenhead *tokens, const struct labelhead *labels, 
   clock_t start = clock(), diff;
 
   while (1) {  // parse variable declarations
+    if (e == NULL)
+      goto end;
+
     if (e->token != TOKEN_DEF)
       break;
 
