@@ -1,6 +1,30 @@
-# Grammar 
+# BEANS interpreter
+
+BEANS is a language supposed to run on a coffee machine. 
+
+Is inherits a few things from BASIC, which makes it easy to parse and interpret even on small devices like ESPs.
 
 ```
+DEF PRESSURE
+
+: stage_preinfusion
+CALL run_preinfusion WITH
+  IF PRESSURE > 8 THEN
+    GOTO END
+  FI
+END
+
+: end
+CALL purge
+```
+
+See further examples in the `tests/` folder (files marked with `x` are supposed to fail).
+
+## Grammar
+
+Newlines and spaces are considered white space and are used to separate tokens.
+
+```EBNF
 <program> ::= <header> <code>
 
 <header> ::= <var_decl>*
@@ -27,21 +51,9 @@
 <op> ::= "<" | ">" | "<=" | ">=" | "=="
 
 <func_name> ::= <identifier>
-<identifier> ::= ([a-z] | [A-Z]) ([a-z] | [A-Z] | [0-9])*
-
-newlines and spaces are considered whitespace and are used to seperate tokens
+<identifier> ::= ([a-z] | [A-Z]) ([a-z] | [A-Z] | [0-9] | _)*
 ```
 
-This ought to be enough for our simple language. Example that it should parse
+## TODO
 
-```
-DEF var1
-DEF var2
-
-: stage1
-CALL runStage1 WITH
-  IF PRESSURE > 8 THEN
-    RETURN
-  FI
-END
-```
+- currently no function calls are supported
