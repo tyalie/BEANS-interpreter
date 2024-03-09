@@ -1,0 +1,1 @@
+DEF var DEF var2 var = 4 IF var == 4 THEN var2 = var FI

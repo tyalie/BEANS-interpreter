@@ -1,0 +1,10 @@
+DEF var1
+DEF var2
+
+: stage1
+CALL runStage1 WITH
+  IF PRESSURE > 8 THEN
+    RETURN
+  FI
+END
+

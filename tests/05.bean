@@ -1,0 +1,5 @@
+DEF var1
+
+: start
+var1 = 2
+GOTO start
