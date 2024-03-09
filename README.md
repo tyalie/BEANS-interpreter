@@ -48,7 +48,7 @@ Newlines and spaces are considered white space and are used to separate tokens.
 
 <number> ::= <digit>+ ("." <digit>+)?
 <digit> ::= [0-9]
-<op> ::= "<" | ">" | "<=" | ">=" | "=="
+<op> ::= "<" | ">" | "<=" | ">=" | "==" | "+" | "-" | "*" | "/"
 
 <func_name> ::= <identifier>
 <identifier> ::= ([a-z] | [A-Z]) ([a-z] | [A-Z] | [0-9] | _)*
