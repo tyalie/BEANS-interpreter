@@ -31,24 +31,27 @@ Newlines and spaces are considered white space and are used to separate tokens. 
 <var_decl> ::= ("DEF" | "EXTERN") <identifier>
 
 <code> ::= (<label> | <statement>)*
-<inner_code> ::= <statement>?
-               | "RETURN"
 <label> ::= ":" <identifier>
-<statement> ::= "IF" <expr> "THEN" <inner_code>* "FI"
-          | <func_call>
-          | <assign>
-          | "GOTO" <identifier>
-<func_call> ::= "CALL" <func_name> ("WITH" <inner_code>* "END")?
+<statement> ::= "IF" <expr> "THEN" <statement>* "FI"
+    | <func_call>
+    | <assign>
+    | "GOTO" <identifier>
+
+<func_call> ::= "CALL" <func_name> <func_call_with>?
+<func_call_with> ::= "WITH" <func_statement>* "END"
+<func_statement> ::= (* similar to <statement>, but including "RETURN" *)
+
 <expr> ::= <unary> <op> <unary>
 <unary> ::= <identifier>
-      | <number>
-      | "(" <expr> ")"
+    | <number>
+    | "(" <expr> ")"
 
 <assign> ::= <identifier> "=" <unary>
 
+<op> ::= "<" | ">" | "<=" | ">=" | "==" | "+" | "-" | "*" | "/"
+
 <number> ::= <digit>+ ("." <digit>+)?
 <digit> ::= [0-9]
-<op> ::= "<" | ">" | "<=" | ">=" | "==" | "+" | "-" | "*" | "/"
 
 <func_name> ::= <identifier>
 <identifier> ::= ([a-z] | [A-Z]) ([a-z] | [A-Z] | [0-9] | _)*
