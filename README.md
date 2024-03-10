@@ -56,6 +56,57 @@ Newlines and spaces are considered white space and are used to separate tokens. 
 
 In addition, multi-line comments (and in turn single-line) are supported using the `/* COMMENT */` syntax borrowed from C.
 
+
+## Semantic
+
+```
+/* Declare variable called `old_pressure` All variables are floats */
+DEF old_pressure
+
+/* An external variable that has a deeper meaning for the interpreter.
+ * Note that these must be declared before use. They can otherwise be used
+ * like normally declared variables.
+ */
+EXTERN PRESSURE
+
+/* A simple assign expression */
+var = 2.0
+var = PRESSURE
+var = ( var + 1 )
+
+/* A simple if clause similar to other languages */
+IF var < 2 THEN
+  /* some code */
+FI
+
+/* This is a label definition.
+ * These can only exit at the top level and are not able to jump into IF clauses or similar.
+ * 
+ * NOTE: There's a whitespace there
+ */
+: label
+
+/* goto to the label. One can exit function calls or if clauses with these */
+GOTO label
+
+/* A simple function call. 
+ * As of rn one cannot define these, but instead the interpreter will call the appropriate
+ * function as mentioned in their lookup table. Stages, button presses, notification and more 
+ * can be easily realized using these.
+ */
+CALL my_func
+
+/* For functions that run in a loop (and support this), one can use the WITH ... END
+ * keywords to execute code after each loop iteration.
+ * This can for example be used to defining exit conditions, tracking variables and more.
+ */
+CALL my_stage WITH
+  /* some code */
+END
+```
+
+
 ## TODO
 
 - currently no function calls are supported
+- implement parameters for function calls
