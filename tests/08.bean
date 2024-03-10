@@ -1,0 +1,10 @@
+DEF var
+
+/*a single line comment*/
+/*
+a big
+multi line comment
+var = 2
+*/
+
+var = 3
