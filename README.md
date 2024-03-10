@@ -110,3 +110,4 @@ END
 
 - currently no function calls are supported
 - implement parameters for function calls
+- extern variable definitions
