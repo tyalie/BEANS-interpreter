@@ -10,6 +10,8 @@
 #include <sys/mman.h>
 #include <sys/queue.h>
 
+#define MAX_TOKEN_LENGTH (100)
+
 #define CHECK_WHITESPACE(VAR) (*VAR == '\n' || *VAR == ' ' || *VAR == '\0')
 #define IS_BOOL_OP(T) \
   (T == TOKEN_LESS || T == TOKEN_GREATER || T == TOKEN_LEQ || T == TOKEN_GEQ || T == TOKEN_EQ)
@@ -95,13 +97,18 @@ LIST_HEAD(labelhead, label_entry);
 
 
 char* read_next_token(char* program, char* chars) {
-  char* start, * end;
+  char* start, *end;
   for (start = program; CHECK_WHITESPACE(start); start++) {
     if (*start == '\0')
       return NULL;
   }
 
   for (end = start; !CHECK_WHITESPACE(end); end++);
+
+  if (end - start > MAX_TOKEN_LENGTH) {
+    printf("ERR: Token longer than %d discovered\n", MAX_TOKEN_LENGTH);
+    return NULL;
+  }
 
   memcpy(chars, start, end - start);
   chars[end - start] = '\0';
@@ -131,7 +138,7 @@ int lexer(char* program, struct tokenhead *tokens, struct identifierhead *ids) {
   LIST_INIT(tokens);
   LIST_INIT(ids);
 
-  char name[100];
+  char name[MAX_TOKEN_LENGTH];
   char* idx = program;
   
   struct token_entry *l = NULL, *e = NULL;
