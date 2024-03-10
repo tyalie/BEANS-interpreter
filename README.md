@@ -22,13 +22,13 @@ See further examples in the `tests/` folder (files marked with `x` are supposed 
 
 ## Grammar
 
-Newlines and spaces are considered white space and are used to separate tokens.
+Newlines and spaces are considered white space and are used to separate tokens. Also note here that variable definitions only happen in the header of the file and are not allowed in the rest of the code.
 
 ```EBNF
 <program> ::= <header> <code>
 
 <header> ::= <var_decl>*
-<var_decl> ::= "DEF" <identifier>
+<var_decl> ::= ("DEF" | "EXTERN") <identifier>
 
 <code> ::= (<label> | <statement>)*
 <inner_code> ::= <statement>?
@@ -53,6 +53,8 @@ Newlines and spaces are considered white space and are used to separate tokens.
 <func_name> ::= <identifier>
 <identifier> ::= ([a-z] | [A-Z]) ([a-z] | [A-Z] | [0-9] | _)*
 ```
+
+In addition, multi-line comments (and in turn single-line) are supported using the `/* COMMENT */` syntax borrowed from C.
 
 ## TODO
 

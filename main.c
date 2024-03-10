@@ -136,6 +136,14 @@ int lexer(char* program, struct tokenhead *tokens, struct identifierhead *ids) {
   
   struct token_entry *l = NULL, *e = NULL;
   while ((idx = read_next_token(idx, name)) != NULL) {
+    if (!strncmp(name, "/*", 2)) {
+      idx = strstr(idx, "*/");
+      if (idx == NULL)
+        reterr(-1, "unable to find closing comment `*/`");
+      idx += 2;
+      continue;
+    } 
+
     l = e;
     e = calloc(1, sizeof(*e));
 
