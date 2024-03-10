@@ -105,6 +105,7 @@ CALL my_func
  */
 CALL my_stage WITH
   /* some code */
+  RETURN  /* one can use RETURN statements in function calls */
 END
 ```
 
